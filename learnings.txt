@@ -1,0 +1,6 @@
+passport explainations
+
+https://medium.com/@prashantramnyc/node-js-with-passport-authentication-simplified-76ca65ee91e5
+https://stackoverflow.com/a/43178070/25813903
+https://www.freecodecamp.org/news/how-to-use-recoil-for-state-management-in-your-react-projects/
+

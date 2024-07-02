@@ -1,0 +1,35 @@
+CREATE TABLE books (
+  id SERIAL PRIMARY KEY,
+  title VARCHAR(255) NOT NULL,
+  authors TEXT[] DEFAULT '{}', -- Empty string array by default
+  shortDescription TEXT,
+  longDescription TEXT,
+  categories TEXT[] DEFAULT '{}', -- Empty string array by default
+  thumbnailUrl VARCHAR(2048) DEFAULT NULL
+);
+
+CREATE TABLE users (
+  id INT PRIMARY KEY AUTO_INCREMENT,
+  email VARCHAR(255) UNIQUE NOT NULL,
+  password VARCHAR(255) NOT NULL,  -- Consider using a secure hashing function for password storage
+  name VARCHAR(255) NOT NULL
+);
+
+
+
+CREATE TABLE user_book (
+  user_id INT NOT NULL,
+  book_id INT NOT NULL,
+  FOREIGN KEY (user_id) REFERENCES users(id),
+  FOREIGN KEY (book_id) REFERENCES books(id),
+  PRIMARY KEY (user_id, book_id)  -- Composite primary key for many-to-many relationship
+);
+
+// To check the which user in db has privilages of a TABLE
+SELECT grantee, privilege_type 
+FROM information_schema.role_table_grants 
+WHERE table_name='users'
+
+// To grant privilages to a user
+GRANT ALL PRIVILEGES ON <table_name> TO <role_name>;
+GRANT ALL PRIVILEGES ON user_book TO me;
